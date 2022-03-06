@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using TMPro;
 
 public class MainManager : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class MainManager : MonoBehaviour
 
     public Text ScoreText;
     public GameObject GameOverText;
+    public GameObject BestScoreText;
     
     private bool m_Started = false;
     private int m_Points;
@@ -37,6 +39,7 @@ public class MainManager : MonoBehaviour
             }
         }
         AddPoint(0);
+        BestScore();
     }
 
     private void Update()
@@ -66,12 +69,19 @@ public class MainManager : MonoBehaviour
     void AddPoint(int point)
     {
         m_Points += point;
-        ScoreText.text = $"{GameManager.Instance.playerName} Score : {m_Points}";
+        ScoreText.text = $"{GameManager.Instance.PlayerName} Score : {m_Points}";
     }
 
     public void GameOver()
     {
         m_GameOver = true;
         GameOverText.SetActive(true);
+        GameManager.Instance.CheckHighscore(m_Points);
+        BestScore();
+    }
+
+    private void BestScore()
+    {
+        BestScoreText.GetComponent<TMP_Text>().text = $"Best Score : {GameManager.Instance.HighScoreName} : {GameManager.Instance.HighScore}";
     }
 }

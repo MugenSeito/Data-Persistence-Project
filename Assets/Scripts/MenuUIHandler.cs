@@ -10,11 +10,23 @@ using TMPro;
 public class MenuUIHandler : MonoBehaviour
 {
     public GameObject nameInput;
+    public GameObject scoreText;
+
+    private void Start()
+    {
+        GameManager.Instance.LoadHighscore();
+        scoreText.GetComponent<TMP_Text>().text = $"Best Score : {GameManager.Instance.HighScoreName} : {GameManager.Instance.HighScore}";
+    }
 
     public void StartNew()
     {
-        GameManager.Instance.playerName = nameInput.GetComponent<TMP_InputField>().text;
+        GameManager.Instance.PlayerName = nameInput.GetComponent<TMP_InputField>().text;
         SceneManager.LoadScene(1);
+    }
+
+    public void Leaderboard()
+    {
+        SceneManager.LoadScene(2);
     }
 
     public void Exit()
