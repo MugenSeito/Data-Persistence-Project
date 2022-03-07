@@ -23,10 +23,16 @@ public class GameManager : MonoBehaviour
     }
 
     [System.Serializable]
-    class SaveData
+    public class LeaderboardData
     {
-        public string PlayerName;
-        public int HighScore;
+        [System.Serializable]
+        public class LeaderboardList
+        {
+            public string LeaderName;
+            public int LeaderScore;
+        }
+
+        public List<LeaderboardList> Leaderboard;
     }
 
     public void CheckHighscore(int score)
@@ -35,31 +41,57 @@ public class GameManager : MonoBehaviour
         {
             HighScoreName = PlayerName;
             HighScore = score;
-            SaveHighscore();
+            SaveLeaderboard();
         }
     }
 
-    public void SaveHighscore()
+    public void SaveLeaderboard()
     {
-        SaveData data = new SaveData();
-        data.PlayerName = PlayerName;
-        data.HighScore = HighScore;
+        LeaderboardData leaderboard = LoadLeaderboard();
 
-        string json = JsonUtility.ToJson(data);
+        // Initialize Leaderboard list if no data found
+        if (leaderboard == null)
+        {
+            leaderboard = new LeaderboardData()
+            {
+                Leaderboard = new List<LeaderboardData.LeaderboardList>()
+            };
+        }
+
+        // Add new leader on the top of the board
+        leaderboard.Leaderboard.Insert(0, new LeaderboardData.LeaderboardList()
+        {
+            LeaderName = PlayerName,
+            LeaderScore = HighScore
+        });
+
+        string json = JsonUtility.ToJson(leaderboard);
 
         File.WriteAllText(Application.persistentDataPath + "/savefile.json", json);
     }
 
-    public void LoadHighscore()
+    public LeaderboardData LoadLeaderboard()
     {
+        LeaderboardData leaderboard = new LeaderboardData();
         string path = Application.persistentDataPath + "/savefile.json";
         if (File.Exists(path))
         {
             string json = File.ReadAllText(path);
-            SaveData data = JsonUtility.FromJson<SaveData>(json);
+            leaderboard = JsonUtility.FromJson<LeaderboardData>(json);
+        }
 
-            HighScoreName = data.PlayerName;
-            HighScore = data.HighScore;
+        return leaderboard;
+    }
+
+    public void GetHighScore()
+    {
+        LeaderboardData leaderboard = LoadLeaderboard();
+
+        // Get Highscore if exist
+        if (leaderboard != null)
+        {
+            HighScoreName = leaderboard.Leaderboard[0].LeaderName;
+            HighScore = leaderboard.Leaderboard[0].LeaderScore;
         }
     }
 }

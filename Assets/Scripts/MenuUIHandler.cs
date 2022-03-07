@@ -14,7 +14,7 @@ public class MenuUIHandler : MonoBehaviour
 
     private void Start()
     {
-        GameManager.Instance.LoadHighscore();
+        GameManager.Instance.GetHighScore();
         scoreText.GetComponent<TMP_Text>().text = $"Best Score : {GameManager.Instance.HighScoreName} : {GameManager.Instance.HighScore}";
     }
 
