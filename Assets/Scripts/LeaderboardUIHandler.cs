@@ -17,7 +17,8 @@ public class LeaderboardUIHandler : MonoBehaviour {
 
         if (leaderboard == null) return;
 
-        for (int i = 0; i < leaderboard.Leaderboard.Count; i++)
+        int displayLimit = leaderboard.Leaderboard.Count < 10 ? leaderboard.Leaderboard.Count : 10;
+        for (int i = 0; i < displayLimit; i++)
         {
             playerList.GetComponent<TMP_Text>().text += leaderboard.Leaderboard[i].LeaderName + "\n";
             scoreList.GetComponent<TMP_Text>().text += leaderboard.Leaderboard[i].LeaderScore + "\n";
