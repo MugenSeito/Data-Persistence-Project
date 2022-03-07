@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 392908469}
   - component: {fileID: 392908468}
   m_Layer: 5
-  m_Name: Score
+  m_Name: ScoreList
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -694,7 +694,7 @@ GameObject:
   - component: {fileID: 1093612963}
   - component: {fileID: 1093612962}
   m_Layer: 5
-  m_Name: PlayerName
+  m_Name: PlayerList
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -914,8 +914,8 @@ GameObject:
   - component: {fileID: 1748485827}
   - component: {fileID: 1748485826}
   - component: {fileID: 1748485825}
-  - component: {fileID: 1748485829}
   - component: {fileID: 1748485830}
+  - component: {fileID: 1748485829}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -1016,11 +1016,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1748485824}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4bfbb773e73ba0c488d2a94a0df83826, type: 3}
+  m_Script: {fileID: 11500000, guid: fd528a072541a06408b4d0b62e668d8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nameInput: {fileID: 0}
-  scoreText: {fileID: 0}
+  playerList: {fileID: 1093612960}
+  scoreList: {fileID: 392908466}
 --- !u!114 &1748485830
 MonoBehaviour:
   m_ObjectHideFlags: 0
