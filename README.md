@@ -1,5 +1,4 @@
-# Data-Persistence-Project
- 
+# Data Persistence Project
 A unity junior pathway mission 2 challenge
 
 ## Implemented
